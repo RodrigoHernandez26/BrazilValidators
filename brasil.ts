@@ -5,12 +5,13 @@ export class BrazilValidator {
     constructor() { }
 
     /**
-     * Valida se o CPF é valido. Deve-se ser informado o cpf sem máscara.
+     * Valida se o CPF é valido. Pode ser informado com máscara.
     */
     static isValidCpf() {
         return (control: AbstractControl) => {
-            const cpf = control.value;
+            var cpf = control.value;
             if (cpf) {
+                cpf = cpf.replace(/[^\d]+/g,'');
                 let numbers, digits, sum, i, result, equalDigits;
                 equalDigits = 1;
                 if (cpf.length < 11) {
@@ -57,6 +58,9 @@ export class BrazilValidator {
         };
     }
 
+    /**
+     * Valida se o CNPJ é valido. Pode ser informado com máscara.
+    */
     static isValidCNPJ() {
         return (control: AbstractControl) => {
             var cnpj = control.value;
